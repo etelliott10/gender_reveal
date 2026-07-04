@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boy or Girl?</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="page">
+    <h1 class="title">Boy or Girl?</h1>
+    <p class="subtitle">Tap the button to find out...</p>
+
+    <div class="stage" id="stage">
+      <img id="photo-boy" class="photo" src="/images/boy" alt="Boy">
+      <img id="photo-girl" class="photo" src="/images/girl" alt="Girl">
+
+      <div id="sike-overlay" class="sike-overlay">
+        <span class="sike-text">SIKE!</span>
+      </div>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <button id="reveal-btn" class="reveal-btn">Reveal Gender!</button>
+  </main>
+
+  <script src="/script.js"></script>
+</body>
+</html>
