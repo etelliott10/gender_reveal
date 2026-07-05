@@ -59,6 +59,17 @@ const server = http.createServer((req, res) => {
     serveFile(res, path.join(__dirname, 'style.css'));
   } else if (url === '/script.js') {
     serveFile(res, path.join(__dirname, 'script.js'));
+  } else if (url === '/image-config.js') {
+    // Generated live from .env so local edits show up on refresh, with no build step.
+    // (For static hosts like Vercel, `node build.js` writes this same file to disk instead —
+    // see build.js.)
+    const config = {
+      boy: env.BOY_IMAGE ? '/images/boy' : '',
+      girl: env.GIRL_IMAGE ? '/images/girl' : '',
+      winner: env.WINNER_IMAGE_OF_BABY ? '/images/winner' : '',
+    };
+    res.writeHead(200, { 'Content-Type': 'application/javascript' });
+    res.end(`window.IMAGE_CONFIG = ${JSON.stringify(config, null, 2)};\n`);
   } else if (url === '/images/boy') {
     if (!env.BOY_IMAGE) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });

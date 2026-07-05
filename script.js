@@ -4,18 +4,25 @@ const WRONG_GENDER = CORRECT_GENDER === 'boy' ? 'girl' : 'boy';
 
 const boyPhoto = document.getElementById('photo-boy');
 const girlPhoto = document.getElementById('photo-girl');
+const winnerPhoto = document.getElementById('photo-winner');
 const revealBtn = document.getElementById('reveal-btn');
 const sikeOverlay = document.getElementById('sike-overlay');
 const resultEl = document.getElementById('result');
 const stage = document.getElementById('stage');
 
+const photos = { boy: boyPhoto, girl: girlPhoto, winner: winnerPhoto };
+
+const config = window.IMAGE_CONFIG || {};
+boyPhoto.src = config.boy || '';
+girlPhoto.src = config.girl || '';
+winnerPhoto.src = config.winner || '';
+
 let cycleTimer = null;
 let currentlyShown = 'girl';
 
-function show(gender) {
-  currentlyShown = gender;
-  boyPhoto.classList.toggle('active', gender === 'boy');
-  girlPhoto.classList.toggle('active', gender === 'girl');
+function show(name) {
+  currentlyShown = name;
+  Object.entries(photos).forEach(([key, el]) => el.classList.toggle('active', key === name));
 }
 
 function startCycling() {
@@ -95,6 +102,11 @@ async function handleReveal() {
   spawnConfetti(CORRECT_GENDER);
 
   revealBtn.classList.add('hidden');
+
+  // Grand finale: fade from the gender photo to the winning family photo.
+  await sleep(2800);
+  show('winner');
+  resultEl.textContent = 'Welcome to the family!';
 }
 
 show('girl');

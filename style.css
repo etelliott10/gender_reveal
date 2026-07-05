@@ -72,6 +72,10 @@ body {
   transition: opacity 0.06s linear;
 }
 
+#photo-winner {
+  transition: opacity 1.2s ease;
+}
+
 .photo.active {
   opacity: 1;
 }
